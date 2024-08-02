@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react'
 import icons from '../assets/index.js'
+import PomodoroSettings from '../components/PomodoroSettings.jsx'
 
 const Pomodoro = () => {
+  const [audio] = useState(new Audio(icons.sound))
   const [type, setType] = useState('focus')
   const [time, setTime] = useState(1500)
   const [active, setActive] = useState(false)
+  const [settings, setSettings] = useState(false)
+
+  const handleSettings = () => {
+    setSettings(!settings)
+  }
 
   useEffect(() => {
     document.title = formatTime(time) + ' | ' + 'Pomodoro Timer'
@@ -31,6 +38,7 @@ const Pomodoro = () => {
         interval = setInterval(() => {
             setTime(time - 1)
             if (time === 0) {
+                audio.play()
                 setActive(false)
                 if (type === 'focus') {
                     setTime(1500)
@@ -72,7 +80,7 @@ const Pomodoro = () => {
   return (
     <div className='bg-[#F6F5F5] font-pomodoro text-[#1a1a1a]'>
         <div className="flex flex-col justify-center items-center min-h-screen mx-4 ">
-        <div className="flex flex-row space-x-2 text-lg">
+        <div className="flex flex-row space-x-2 text-sm md:text-lg">
             <button 
                 value='focus' 
                 onClick={handleTypeChange} 
@@ -98,11 +106,12 @@ const Pomodoro = () => {
             <button onClick={handleReset}>
                 <img src={icons.reset} alt="reset" className='w-6'/>
             </button>
-            <button>
+            <button onClick={handleSettings}>
                 <img src={icons.setting} alt="settings" className='w-6'/>
             </button>
         </div>
-    </div>
+        </div>
+        <PomodoroSettings open={settings} handle={handleSettings}/>
     </div>
 
   )
