@@ -8,7 +8,13 @@ const Pomodoro = () => {
   const [time, setTime] = useState(1500)
   const [active, setActive] = useState(false)
   const [settings, setSettings] = useState(false)
+  const [dark, setDark] = useState(false)
 
+  useEffect(() => {
+    const pref = window.location.search.replace('?', '') === 'dark=true'
+    setDark(pref)
+    if(pref) document.body.classList.add('dark')
+  }, [])
   const handleSettings = () => {
     setSettings(!settings)
   }
@@ -78,7 +84,7 @@ const Pomodoro = () => {
   }
 
   return (
-    <div className='bg-[#F6F5F5] font-pomodoro text-[#1a1a1a]'>
+    <div className='bg-[#F6F5F5] font-pomodoro text-[#1a1a1a] dark:bg-zinc-950 dark:text-slate-100'>
         <div className="flex flex-col justify-center items-center min-h-screen mx-4 ">
         <div className="flex flex-row space-x-2 text-sm md:text-lg">
             <button 
@@ -100,14 +106,14 @@ const Pomodoro = () => {
                 Long Break
             </button>
         </div>
-        <p className="text-8xl font-bold mt-2">{formatTime(time)}</p> 
-        <div className="flex flex-row space-x-2 mt-5">
-            <button onClick={() => setActive(!active)} className={`${active ? 'bg-[#1a1a1a] text-slate-100' : 'border'} border rounded-full w-28 px-5 py-0.5`}>{active ? 'Pause' : 'Start'}</button>
+        <p className="text-7xl md:text-8xl font-bold mt-2">{formatTime(time)}</p> 
+        <div className="flex flex-row space-x-2 mt-2.5 md:mt-5">
+            <button onClick={() => setActive(!active)} className={`${active ? 'bg-[#1a1a1a] text-slate-100' : 'border'} text-xs md:text-base rounded-full w-28 px-5 py-0.5`}>{active ? 'Pause' : 'Start'}</button>
             <button onClick={handleReset}>
-                <img src={icons.reset} alt="reset" className='w-6'/>
+                <img src={dark ? icons.dreset : icons.reset} alt="reset" className='w-6'/>
             </button>
             <button onClick={handleSettings}>
-                <img src={icons.setting} alt="settings" className='w-6'/>
+                <img src={dark ? icons.dsetting : icons.setting} alt="settings" className='w-6'/>
             </button>
         </div>
         </div>

@@ -5,7 +5,7 @@ const PomodoroSettings = ({ open, handle }) => {
   if(!open) return null  
   return (
     <div className="fixed inset-0 bg-opacity-80 flex justify-center items-center z-50">
-        <div className="bg-slate-50 p-8 rounded-md shadow-lg relative">
+        <div className="bg-slate-50 dark:bg-zinc-900 p-8 rounded-md shadow-lg relative">
             <div className="absolute top-2 right-4 text-2xl md:text-xl">
                 <button onClick={handle}>&times;</button>
             </div>
