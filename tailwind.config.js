@@ -7,7 +7,8 @@ export default {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      'pomodoro': ['Space Grotesk']
+      'pomodoro': ['Space Grotesk'],
+      'retro-clock': ['Bebas Neue', 'cursive']
     },
     extend: {},
   },
