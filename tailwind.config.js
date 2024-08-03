@@ -10,7 +10,12 @@ export default {
       'pomodoro': ['Space Grotesk'],
       'retro-clock': ['Bebas Neue', 'cursive']
     },
-    extend: {},
+    extend: {
+      scale: {
+        '300': '3.0',
+        '380': '3.8'
+      }
+    },
   },
   plugins: [],
 }
